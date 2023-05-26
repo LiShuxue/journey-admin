@@ -1,4 +1,4 @@
-import { ReportHandler } from 'web-vitals';
+import type { ReportHandler } from 'web-vitals';
 
 // https://github.com/GoogleChrome/web-vitals
 // 三个关键指标（CLS、FID、LCP）

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   UnorderedListOutlined,
   EditOutlined,
@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
 const menuItems: MenuProps['items'] = [
   {
@@ -33,9 +33,13 @@ const menuItems: MenuProps['items'] = [
 ];
 
 const Layout: React.FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const onClick: MenuProps['onClick'] = (item) => {
+    if (location.pathname === item.key) {
+      return;
+    }
     navigate(item.key);
   };
 
@@ -51,7 +55,10 @@ const Layout: React.FC = () => {
         />
       </div>
       <div className="right">
-        <Outlet />
+        {/* 加载指示器 Suspense 组件需要置于懒加载组件上 */}
+        <Suspense fallback={<div>Route Page Loading...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );

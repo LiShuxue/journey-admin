@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 
 const App: React.FC = () => {
-  return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
+  return <RouterProvider router={router} fallbackElement={<p>Route Loading...</p>} />;
 };
 
 export default App;

@@ -1,22 +1,45 @@
-import { createBrowserRouter, redirect, RouteObject } from 'react-router-dom';
+import { lazy } from 'react';
+import {
+  createBrowserRouter,
+  redirect,
+  RouteObject,
+  useRouteError,
+  Navigate,
+} from 'react-router-dom';
 
 import Layout from '../pages/layout';
-import Login from '../pages/login';
-import List from '../pages/list';
-import Detail from '../pages/detail';
-import Edit from '../pages/edit';
-import Upload from '../pages/upload';
-import User from '../pages/user';
+
+const Login = lazy(() => import('../pages/login'));
+const List = lazy(() => import('../pages/list'));
+const Detail = lazy(() => import('../pages/detail'));
+const Edit = lazy(() => import('../pages/edit'));
+const Upload = lazy(() => import('../pages/upload'));
+const User = lazy(() => import('../pages/user'));
+
+// 错误边界
+const ErrorBoundary = () => {
+  const err = useRouteError() as any;
+  return (
+    <div>
+      <h1>Somthing went wrong!</h1>
+      <p>{err.message}</p>
+    </div>
+  );
+};
 
 export const routes: RouteObject[] = [
   {
     path: '/',
+    element: <Navigate to="/list" />,
+  },
+  {
+    path: '/',
     Component: Layout,
-    errorElement: <h1>Somthing went wrong</h1>,
+    errorElement: <ErrorBoundary />,
     loader: () => {
       const token = null;
       if (!token) {
-        throw redirect('/login');
+        throw redirect('/loginlsx');
       }
       return { token };
     },
@@ -44,8 +67,12 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: '/login',
+    path: '/loginlsx',
     Component: Login,
+  },
+  {
+    path: '*',
+    element: <Navigate to="/list" />,
   },
 ];
 

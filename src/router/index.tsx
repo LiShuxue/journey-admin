@@ -1,5 +1,6 @@
 import { createBrowserRouter, redirect, RouteObject } from 'react-router-dom';
-import App from '../App';
+
+import Layout from '../pages/layout';
 import Login from '../pages/login';
 import List from '../pages/list';
 import Detail from '../pages/detail';
@@ -10,6 +11,8 @@ import User from '../pages/user';
 export const routes: RouteObject[] = [
   {
     path: '/',
+    Component: Layout,
+    errorElement: <h1>Somthing went wrong</h1>,
     loader: () => {
       const token = null;
       if (!token) {
@@ -17,8 +20,6 @@ export const routes: RouteObject[] = [
       }
       return { token };
     },
-    Component: App,
-    errorElement: <h1>Somthing went wrong</h1>,
     children: [
       {
         path: '/list',

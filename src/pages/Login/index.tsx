@@ -33,7 +33,9 @@ const Login = () => {
         }
         navigate('/list', { replace: true });
       })
-      .catch(() => {});
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

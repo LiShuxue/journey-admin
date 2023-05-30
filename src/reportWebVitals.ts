@@ -19,7 +19,9 @@ const reportWebVitals = (onPerfEntry?: ReportHandler) => {
         // 第一字节时间 Time to First Byte (TTFB) 是在实验室和现场测量连接建立时间和 Web 服务器响应能力的一个基础指标。它有助于识别 Web 服务器何时对请求的响应速度太慢。对 HTML 文档的请求，该指标先于其他所有的加载性能指标。
         getTTFB(onPerfEntry);
       })
-      .catch(() => {});
+      .catch((e) => {
+        console.log(e);
+      });
   }
 };
 

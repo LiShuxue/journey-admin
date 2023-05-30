@@ -20,7 +20,9 @@ const User = () => {
       .then((response) => {
         setUserData(response.data.userList);
       })
-      .catch(() => {})
+      .catch((e) => {
+        console.log(e);
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -77,7 +79,9 @@ const User = () => {
       }
       closeModal();
       fetchData();
-    } catch (error) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
   const confirmModal = async () => {
     try {
@@ -92,7 +96,9 @@ const User = () => {
           submit(user);
         },
       });
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const deleteUser = (user: UserDataType) => {
@@ -108,7 +114,9 @@ const User = () => {
           .then(() => {
             fetchData();
           })
-          .catch(() => {});
+          .catch((e) => {
+            console.log(e);
+          });
       },
     });
   };

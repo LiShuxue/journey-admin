@@ -1,13 +1,6 @@
 import { Space, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
-// 后台返回的数据的结构
-export type UserDataType = {
-  username: string;
-  password: string;
-  _id: string;
-};
-
 export const getColumns = (
   editUser: (user: UserDataType) => void,
   deleteUser: (user: UserDataType) => void

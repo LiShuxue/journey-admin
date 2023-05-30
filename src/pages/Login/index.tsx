@@ -1,30 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
 import SHA256 from 'crypto-js/sha256';
-import http from '../../http';
-import API from '../../http/api';
+import { loginRequest } from '../../http/api';
 import { setAccessToken, setRefreshToken, setUsername } from '../../auth';
 
 import './index.scss';
 
-type userData = {
-  username: string;
-  password: string;
-};
-
 const Login = () => {
   const navigate = useNavigate();
 
-  const onSubmit = (user: userData) => {
+  const onSubmit = (user: UserDataType) => {
     login(user);
   };
 
-  const login = (user: userData) => {
-    http
-      .post(API.notRequireAuth.login, {
-        username: user.username,
-        password: SHA256(user.password).toString(),
-      })
+  const login = (user: UserDataType) => {
+    loginRequest({
+      username: user.username,
+      password: SHA256(user.password).toString(),
+    })
       .then((response) => {
         if (response.data.access_token && response.data.refresh_token && response.data.username) {
           setAccessToken(response.data.access_token);

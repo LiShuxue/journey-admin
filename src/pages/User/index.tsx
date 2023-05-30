@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Space, Modal, Form, Input } from 'antd';
 import SHA256 from 'crypto-js/sha256';
-import http from '../../http';
-import API from '../../http/api';
+import {
+  deleteUserRequest,
+  registerRequest,
+  updateUserRequest,
+  userListRequest,
+} from '../../http/api';
 import { getColumns } from './config';
-import type { UserDataType } from './config';
 
 const User = () => {
   const [userData, setUserData] = useState<UserDataType[]>();
@@ -15,8 +18,7 @@ const User = () => {
 
   const fetchData = () => {
     setLoading(true);
-    http
-      .get(API.requireAuth.userList)
+    userListRequest()
       .then((response) => {
         setUserData(response.data.userList);
       })
@@ -64,17 +66,15 @@ const User = () => {
   const submit = async (user: UserDataType) => {
     try {
       if (title === '新增') {
-        await http.post(API.notRequireAuth.register, {
+        await registerRequest({
           username: user.username,
           password: SHA256(user.password).toString(),
         });
       } else if (title === '编辑') {
-        await http.post(API.requireAuth.updateUser, {
-          user: {
-            _id: user._id,
-            username: user.username,
-            password: SHA256(user.password).toString(),
-          },
+        await updateUserRequest({
+          _id: user._id,
+          username: user.username,
+          password: SHA256(user.password).toString(),
         });
       }
       closeModal();
@@ -109,8 +109,7 @@ const User = () => {
       cancelText: 'Cancel',
       closable: false,
       onOk: () => {
-        http
-          .post(API.requireAuth.deleteUser, { ids: [user._id] })
+        deleteUserRequest({ ids: [user._id] })
           .then(() => {
             fetchData();
           })
@@ -133,7 +132,7 @@ const User = () => {
         <Table
           columns={columns}
           dataSource={userData}
-          rowKey={(record) => record._id}
+          rowKey={(record) => record._id as string}
           loading={loading}
         />
       </Space>

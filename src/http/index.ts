@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { message, Modal } from 'antd';
-import API from './api';
 import { setAccessToken, setRefreshToken, setUsername, getAuthData } from '../auth';
-
-type authPath = keyof typeof API.requireAuth;
 
 const instance = axios.create({
   baseURL: '/blog-api',
@@ -12,15 +9,8 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    for (const key in API.requireAuth) {
-      // 需要携带token
-      if (config.url?.includes(API.requireAuth[key as authPath])) {
-        if (getAuthData().accessToken && getAuthData().refreshToken) {
-          config.headers.Authorization = `Bearer ${getAuthData().accessToken}`;
-          config.headers['refresh-token'] = getAuthData().refreshToken;
-        }
-      }
-    }
+    config.headers.Authorization = `Bearer ${getAuthData().accessToken}`;
+    config.headers['refresh-token'] = getAuthData().refreshToken;
     return config;
   },
   (error) => {
@@ -31,6 +21,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     if (response.status === 200 && response.data.errMsg) {
+      message.error(response.data.errMsg);
       return Promise.reject(response);
     }
     if (
@@ -55,8 +46,13 @@ instance.interceptors.response.use(
           setUsername('');
           setAccessToken('');
           setRefreshToken('');
+          // 使用原生的js做重定向
+          const origin = window.location.origin;
+          window.location.href = `${origin}/adminlsx/loginlsx`;
         },
       });
+    } else {
+      message.error(error.response.data.errMsg);
     }
     return Promise.reject(error.response);
   }

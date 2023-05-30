@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import {
   UnorderedListOutlined,
   EditOutlined,
@@ -34,7 +34,7 @@ const menuItems: MenuProps['items'] = [
   },
 ];
 
-const Layout: React.FC = () => {
+const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 

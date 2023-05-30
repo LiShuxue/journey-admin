@@ -1,65 +1,29 @@
-import { FC, createContext, useState, useContext } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+// 用在一些普通js中，因为useContext不能用在普通js中
+let username = sessionStorage.getItem('username') || '';
+let accessToken = sessionStorage.getItem('accessToken') || '';
+let refreshToken = sessionStorage.getItem('refreshToken') || '';
 
-export type AuthContextType = {
-  userName: string;
-  accessToken: string;
-  refreshToken: string;
-  signin: (
-    userName: string,
-    accessToken: string,
-    refreshToken: string,
-    callback: VoidFunction
-  ) => void;
-  signout: (callback: VoidFunction) => void;
+const setUsername = (un: string) => {
+  username = un;
+  sessionStorage.setItem('username', un);
 };
 
-export type AuthProviderProps = {
-  children?: React.ReactNode;
+const setAccessToken = (at: string) => {
+  accessToken = at;
+  sessionStorage.setItem('accessToken', at);
 };
 
-const AuthContext = createContext<AuthContextType>(null!);
+const setRefreshToken = (rt: string) => {
+  refreshToken = rt;
+  sessionStorage.setItem('refreshToken', rt);
+};
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [userName, setUserName] = useState<string>('');
-  const [accessToken, setAccessToken] = useState<string>('');
-  const [refreshToken, setRefreshToken] = useState<string>('');
-
-  const signin = (
-    userName: string,
-    accessToken: string,
-    refreshToken: string,
-    callback: VoidFunction
-  ) => {
-    setUserName(userName);
-    setAccessToken(accessToken);
-    setRefreshToken(refreshToken);
-    callback();
+const getAuthData = () => {
+  return {
+    username,
+    accessToken,
+    refreshToken,
   };
-
-  const signout = (callback: VoidFunction) => {
-    setUserName('');
-    setAccessToken('');
-    setRefreshToken('');
-    callback();
-  };
-
-  const value = { userName, accessToken, refreshToken, signin, signout };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-export const RequireAuth = ({ children }: { children: JSX.Element }) => {
-  const auth = useAuth();
-  const location = useLocation();
-
-  if (!auth.userName || !auth.accessToken || !auth.refreshToken) {
-    return <Navigate to="/loginlsx" state={{ from: location }} replace />;
-  }
-
-  return children;
-};
+export { setUsername, setAccessToken, setRefreshToken, getAuthData };

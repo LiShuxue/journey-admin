@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import {
   UnorderedListOutlined,
   EditOutlined,
@@ -36,11 +36,10 @@ const Layout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('list', { replace: true });
-    }
-  }, [location]);
+  // 默认重定向到list
+  if (location.pathname === '/') {
+    navigate('/list', { replace: true });
+  }
 
   const onClick: MenuProps['onClick'] = (item) => {
     if (location.pathname === item.key) {

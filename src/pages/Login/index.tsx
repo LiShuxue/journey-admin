@@ -32,7 +32,8 @@ const Login = () => {
           setUsername(response.data.username);
         }
         navigate('/list', { replace: true });
-      });
+      })
+      .catch(() => {});
   };
 
   return (

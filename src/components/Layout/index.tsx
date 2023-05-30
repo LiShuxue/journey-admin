@@ -53,13 +53,7 @@ const Layout: React.FC = () => {
   return (
     <div className="layout">
       <div className="left">
-        <Menu
-          onClick={onClick}
-          style={{ width: 250, height: '100%' }}
-          defaultSelectedKeys={['list']}
-          mode="inline"
-          items={menuItems}
-        />
+        <Menu onClick={onClick} defaultSelectedKeys={['list']} mode="inline" items={menuItems} />
       </div>
       <div className="right">
         {/* 加载指示器 Suspense 组件需要置于懒加载组件上 */}

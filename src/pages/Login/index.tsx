@@ -20,11 +20,6 @@ const Login = () => {
   };
 
   const login = (user: userData) => {
-    // setAccessToken('1');
-    // setRefreshToken('1');
-    // setUsername('1');
-    // navigate('/', { replace: true });
-
     http
       .post(API.notRequireAuth.login, {
         username: user.username,

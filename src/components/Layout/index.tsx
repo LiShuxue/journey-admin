@@ -9,6 +9,8 @@ import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
+import './index.scss';
+
 const menuItems: MenuProps['items'] = [
   {
     label: '文章列表',
@@ -53,7 +55,7 @@ const Layout: React.FC = () => {
       <div className="left">
         <Menu
           onClick={onClick}
-          style={{ width: 250 }}
+          style={{ width: 250, height: '100%' }}
           defaultSelectedKeys={['list']}
           mode="inline"
           items={menuItems}

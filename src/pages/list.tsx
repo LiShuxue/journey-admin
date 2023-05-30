@@ -1,6 +1,4 @@
-import React from 'react';
-
-const List: React.FC = () => {
+const List = () => {
   return <div>list</div>;
 };
 

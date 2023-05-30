@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Upload: React.FC = () => {
+const Upload = () => {
   return <div>upload</div>;
 };
 

@@ -1,4 +1,4 @@
-import http from './index';
+import http from './axios';
 
 export const loginRequest = (body: UserDataType) => {
   return http.post('admin/login', body);

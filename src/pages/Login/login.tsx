@@ -4,7 +4,7 @@ import SHA256 from 'crypto-js/sha256';
 import { loginRequest } from '../../http/api';
 import { setAccessToken, setRefreshToken, setUsername } from '../../auth';
 
-import './index.scss';
+import './login.scss';
 
 const Login = () => {
   const navigate = useNavigate();

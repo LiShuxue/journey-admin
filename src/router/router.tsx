@@ -1,9 +1,9 @@
 import { lazy } from 'react';
-import type { RouteObject} from 'react-router-dom';
+import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter, redirect, Navigate } from 'react-router-dom';
 import { getAuthData } from '../auth';
-import Layout from '../components/Layout';
-import ErrorBoundary from '../components/ErrorBoundary';
+import Layout from '../components/Layout/layout';
+import ErrorBoundary from '../components/ErrorBoundary/error';
 
 export const routes: RouteObject[] = [
   {
@@ -40,13 +40,13 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/user',
-        Component: lazy(() => import('../pages/User')),
+        Component: lazy(() => import('../pages/User/user')),
       },
     ],
   },
   {
     path: '/loginlsx',
-    Component: lazy(() => import('../pages/Login')),
+    Component: lazy(() => import('../pages/Login/login')),
     loader: () => {
       const auth = getAuthData();
       if (auth.username && auth.refreshToken && auth.accessToken) {

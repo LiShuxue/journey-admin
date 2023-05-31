@@ -3,7 +3,7 @@ import { Table, Button, Space, Modal, Input, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { blogListRequest, deleteBlogRequest } from '../../http/api';
 import { getColumns } from './config';
-import { useGlobalData } from '../../context/globalContext';
+import { useGlobalData } from '../../hook/useGlobalData';
 
 const List = () => {
   const navigate = useNavigate();

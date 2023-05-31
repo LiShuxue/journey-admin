@@ -1,4 +1,4 @@
-import { useGlobalData } from '../context/globalContext';
+import { useGlobalData } from '../hook/useGlobalData';
 const Detail = () => {
   const { state } = useGlobalData();
   console.log(state);

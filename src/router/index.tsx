@@ -2,8 +2,8 @@ import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter, redirect, Navigate } from 'react-router-dom';
 import { getAuthData } from '../auth';
-import Layout from '../components/Layout/layout';
-import ErrorBoundary from '../components/ErrorBoundary/error';
+import Layout from '../components/Layout';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 export const routes: RouteObject[] = [
   {
@@ -24,7 +24,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: '/list',
-        Component: lazy(() => import('../pages/list')),
+        Component: lazy(() => import('../pages/List/list')),
       },
       {
         path: '/detail',

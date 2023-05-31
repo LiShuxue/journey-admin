@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter, redirect, Navigate } from 'react-router-dom';
-import { getAuthData } from '../auth';
+import { getAuthData } from '../context/auth';
 import Layout from '../components/Layout';
 import ErrorBoundary from '../components/ErrorBoundary';
 

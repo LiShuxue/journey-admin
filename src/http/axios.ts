@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message, Modal } from 'antd';
-import { setAccessToken, setRefreshToken, setUsername, getAuthData } from '../auth';
+import { setAccessToken, setRefreshToken, setUsername, getAuthData } from '../context/auth';
 
 const instance = axios.create({
   baseURL: '/blog-api',

@@ -2,9 +2,9 @@ import { Space, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 export const getColumns = (
-  editUser: (user: UserDataType) => void,
-  deleteUser: (user: UserDataType) => void
-): ColumnsType<UserDataType> => {
+  editUser: (user: UserType) => void,
+  deleteUser: (user: UserType) => void
+): ColumnsType<UserType> => {
   return [
     {
       title: 'username',
@@ -19,7 +19,7 @@ export const getColumns = (
     {
       title: '操作',
       key: 'action',
-      render: (user: UserDataType) => (
+      render: (user: UserType) => (
         <Space size="middle">
           <Button onClick={() => editUser(user)}>编辑</Button>
           <Button danger onClick={() => deleteUser(user)}>

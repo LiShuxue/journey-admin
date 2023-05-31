@@ -9,11 +9,11 @@ import './login.scss';
 const Login = () => {
   const navigate = useNavigate();
 
-  const onSubmit = (user: UserDataType) => {
+  const onSubmit = (user: UserType) => {
     login(user);
   };
 
-  const login = (user: UserDataType) => {
+  const login = (user: UserType) => {
     loginRequest({
       username: user.username,
       password: SHA256(user.password).toString(),

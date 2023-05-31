@@ -13,6 +13,9 @@ dependencies:
   crypto-js:
     specifier: ^4.1.1
     version: 4.1.1
+  dayjs:
+    specifier: ^1.11.7
+    version: 1.11.7
   react:
     specifier: ^18.2.0
     version: 18.2.0

@@ -13,12 +13,12 @@ import './index.scss';
 
 const menuItems: MenuProps['items'] = [
   {
-    label: '文章列表',
+    label: '博客列表',
     key: '/list',
     icon: <UnorderedListOutlined />,
   },
   {
-    label: '编辑文章',
+    label: '编辑博客',
     key: '/edit',
     icon: <EditOutlined />,
   },

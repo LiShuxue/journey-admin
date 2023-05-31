@@ -10,7 +10,7 @@ import {
 import { getColumns } from './config';
 
 const User = () => {
-  const [userData, setUserData] = useState<UserDataType[]>();
+  const [userData, setUserData] = useState<UserType[]>();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +44,7 @@ const User = () => {
       _id: '',
     });
   };
-  const showEditUser = (user: UserDataType) => {
+  const showEditUser = (user: UserType) => {
     setTitle('编辑');
     setIsModalOpen(true);
     form.setFieldsValue({
@@ -63,7 +63,7 @@ const User = () => {
     });
   };
 
-  const submit = async (user: UserDataType) => {
+  const submit = async (user: UserType) => {
     try {
       if (title === '新增') {
         await registerRequest({
@@ -101,7 +101,7 @@ const User = () => {
     }
   };
 
-  const deleteUser = (user: UserDataType) => {
+  const deleteUser = (user: UserType) => {
     Modal.confirm({
       content: '确认删除吗？',
       title: '请确认',

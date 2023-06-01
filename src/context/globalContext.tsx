@@ -14,8 +14,10 @@ type ActionType = {
 const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
     case 'setBlog': {
-      state.blog = cloneDeep(action.payload);
-      return state;
+      return {
+        ...state,
+        blog: cloneDeep(action.payload),
+      };
     }
     default:
       return state;

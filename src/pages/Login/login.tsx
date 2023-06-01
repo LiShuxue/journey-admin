@@ -19,10 +19,13 @@ const Login = () => {
       password: SHA256(user.password).toString(),
     })
       .then((response) => {
-        if (response.data.access_token && response.data.refresh_token && response.data.username) {
-          setAccessToken(response.data.access_token);
-          setRefreshToken(response.data.refresh_token);
-          setUsername(response.data.username);
+        const at = response.data.access_token || '';
+        const rt = response.data.refresh_token || '';
+        const un = response.data.username || '';
+        if (at && rt && un) {
+          setAccessToken(at);
+          setRefreshToken(rt);
+          setUsername(un);
         }
         navigate('/list', { replace: true });
       })

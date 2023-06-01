@@ -20,7 +20,8 @@ const User = () => {
     setLoading(true);
     userListRequest()
       .then((response) => {
-        setUserData(response.data.userList);
+        const list = response.data.userList || [];
+        setUserData(list);
       })
       .catch((e) => {
         console.log(e);

@@ -5,7 +5,9 @@ const initialData = {
   blog: {},
 };
 
-type StateType = typeof initialData;
+type StateType = {
+  blog: BlogType | BlogDetailType;
+};
 type ActionType = {
   type: string;
   payload: BlogType | BlogDetailType;
@@ -30,7 +32,7 @@ type GlobalContextType = {
 };
 
 export const GlobalContext = createContext<GlobalContextType>({
-  state: initialData,
+  state: initialData as StateType,
   setBlog: () => ({}),
 });
 

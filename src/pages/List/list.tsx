@@ -1,43 +1,28 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Space, Modal, Input, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { blogListRequest, deleteBlogRequest } from '../../http/api';
+import { deleteBlogRequest } from '../../http/api';
 import { getColumns } from './config';
 import { useGlobalData } from '../../hook/useGlobalData';
+import { useGetBlogList } from '../../hook/useGetBlogList';
 
 const List = () => {
   const navigate = useNavigate();
+  const { blogList, loading, fetchList } = useGetBlogList();
   const { setBlog } = useGlobalData();
-  const [listData, setListData] = useState<BlogType[]>();
-  const [originalData, setOriginalData] = useState<BlogType[]>();
-  const [loading, setLoading] = useState(false);
+  const [listData, setListData] = useState<BlogType[]>([]);
   const [form] = Form.useForm();
 
-  const fetchData = () => {
-    setLoading(true);
-    blogListRequest()
-      .then((response) => {
-        setListData(response.data.blogList);
-        setOriginalData(response.data.blogList);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
-    fetchData();
-  }, []);
+    setListData(blogList);
+  }, [blogList]);
 
   const searchBlog = ({ searchValue }: { searchValue: string }) => {
     if (!searchValue) {
       return;
     }
 
-    const newArr = originalData?.filter((value) => {
+    const newArr = blogList?.filter((value) => {
       const keywords = searchValue?.trim().toUpperCase() || '';
       return (
         value.title.toUpperCase().includes(keywords) ||
@@ -51,7 +36,7 @@ const List = () => {
   const resetBlog = () => {
     if (form.getFieldValue('searchValue')) {
       form.resetFields();
-      setListData(originalData);
+      setListData(blogList);
     }
   };
   const gotoDetail = (blog: BlogType) => {
@@ -72,7 +57,7 @@ const List = () => {
       onOk: () => {
         deleteBlogRequest({ ids: [blog._id] })
           .then(() => {
-            fetchData();
+            fetchList();
           })
           .catch((e) => {
             console.log(e);

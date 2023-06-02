@@ -77,6 +77,7 @@ const UploadFile = ({ ossPathByParent = '', disableInput = false }: CompProps) =
   };
 
   const onRemove: UploadProps['onRemove'] = (file) => {
+    console.log(file);
     // async removeImage(file) {
     //   this.sentry.addBreadcrumb('components/Upload.vue --> methods: removeImage');
     //   try {

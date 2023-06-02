@@ -31,3 +31,7 @@ export const deleteBlogRequest = (body: IDsType) => {
 export const getBlogDetailRequest = (id: string) => {
   return http.get(`blog/detail?id=${id}`);
 };
+
+export const getQiniuTokenRequest = (key: string) => {
+  return http.get(`qiniu/uploadToken?key=${key}`);
+};

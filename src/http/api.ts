@@ -27,3 +27,7 @@ export const blogListRequest = () => {
 export const deleteBlogRequest = (body: IDsType) => {
   return http.post('blog/delete', body);
 };
+
+export const getBlogDetailRequest = (id: string) => {
+  return http.get(`blog/detail?id=${id}`);
+};

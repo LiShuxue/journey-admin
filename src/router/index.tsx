@@ -32,7 +32,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/edit',
-        Component: lazy(() => import('../pages/edit')),
+        Component: lazy(() => import('../pages/Edit/edit')),
       },
       {
         path: '/uploadfile',

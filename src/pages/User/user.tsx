@@ -145,14 +145,10 @@ const User = () => {
         onOk={confirmModal}
         cancelText="取消"
         onCancel={closeModal}
+        width={400}
       >
         {/* 使用initialValues，而不是每个input使用一个state，或者每个input的defaultValue */}
-        <Form
-          form={form}
-          initialValues={{ username: '', password: '', _id: '' }}
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 20 }}
-        >
+        <Form form={form} initialValues={{ username: '', password: '', _id: '' }}>
           {title === '编辑' && (
             <Form.Item label="id" name="_id">
               <Input disabled />

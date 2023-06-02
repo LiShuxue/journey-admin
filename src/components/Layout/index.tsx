@@ -8,7 +8,6 @@ import {
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useGlobalData } from '../../hook/useGlobalData';
 
 import './index.scss';
 
@@ -38,7 +37,6 @@ const menuItems: MenuProps['items'] = [
 const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setBlog } = useGlobalData();
 
   // 默认重定向到list
   if (location.pathname === '/') {
@@ -48,9 +46,6 @@ const Layout = () => {
   const onClick: MenuProps['onClick'] = (item) => {
     if (location.pathname === item.key) {
       return;
-    }
-    if (item.key === '/edit') {
-      setBlog({} as BlogType);
     }
     navigate(item.key);
   };

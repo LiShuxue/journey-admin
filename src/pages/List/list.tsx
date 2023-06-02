@@ -3,13 +3,11 @@ import { Table, Button, Space, Modal, Input, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { deleteBlogRequest } from '../../http/api';
 import { getColumns } from './config';
-import { useGlobalData } from '../../hook/useGlobalData';
 import { useGetBlogList } from '../../hook/useGetBlogList';
 
 const List = () => {
   const navigate = useNavigate();
   const { blogList, loading, fetchList } = useGetBlogList();
-  const { setBlog } = useGlobalData();
   const [listData, setListData] = useState<BlogType[]>([]);
   const [form] = Form.useForm();
 
@@ -40,12 +38,10 @@ const List = () => {
     }
   };
   const gotoDetail = (blog: BlogType) => {
-    setBlog(blog);
-    navigate('/detail');
+    navigate('/detail', { state: { id: blog._id } });
   };
   const gotoEdit = (blog: BlogType) => {
-    setBlog(blog);
-    navigate('/edit');
+    navigate('/edit', { state: { id: blog._id } });
   };
   const deleteItem = (blog: BlogType) => {
     Modal.confirm({

@@ -1,41 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import type { ExposeParam } from 'md-editor-rt';
 import { MdEditor } from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import { Form, Input, Button, Radio, Modal, Space } from 'antd';
-import { useGlobalData } from '../../hook/useGlobalData';
-import { getBlogDetailRequest } from '../../http/api';
 import { useGetBlogList } from '../../hook/useGetBlogList';
+import { useGetBlogDetail } from '../../hook/useGetBlogDetail';
 
 import './edit.scss';
 
 const Edit = () => {
+  const location = useLocation();
   const [mdString, setMdString] = useState('');
   const { categoryList, addCategory } = useGetBlogList();
+  const { blogDetail, getBlogDetail } = useGetBlogDetail();
   const editorRef = useRef<ExposeParam>();
-  const { state, setBlog } = useGlobalData();
   const [newCategory, setNewCategory] = useState('');
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
 
   useEffect(() => {
-    if (state.blog._id) {
-      getBlogDetail(state.blog._id);
-    } else {
-      setBlog({} as BlogType);
-    }
+    const id = location.state?.id || '';
+    getBlogDetail(id);
   }, []);
 
-  const getBlogDetail = (id: string) => {
-    getBlogDetailRequest(id)
-      .then((response) => {
-        const blog = response.data.blog || {};
-        setBlog(blog);
-        setMdString(blog.markdownContent);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  useEffect(() => {
+    setMdString(blogDetail.markdownContent);
+  }, [blogDetail]);
 
   const editorSave = (md: string, html: Promise<string>) => {
     return new Promise((resolve, reject) => {
@@ -61,7 +51,7 @@ const Edit = () => {
     addCategory(newCategory);
     closeCategory();
   };
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: BlogType) => {
     console.log(values);
   };
 

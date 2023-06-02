@@ -1,5 +1,6 @@
 import { UploadOutlined } from '@ant-design/icons';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import { UploadFile } from 'antd/es/upload/interface';
+import type { RcFile, UploadProps } from 'antd/es/upload/interface';
 import { Button, Upload, Space, Input, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { getQiniuTokenRequest } from '../../http/api';
@@ -39,9 +40,9 @@ const UploadFile = ({ ossPathByParent = '', disableInput = false }: CompProps) =
           ...response.data,
           key,
         };
-        // @ts-ignore
-        file.extraData = extraData;
-        return file;
+        const ff = file as CustomeFile;
+        ff.extraData = extraData;
+        return ff as RcFile;
       } else {
         message.error('请先填写需要上传到的路径');
         return Promise.reject(new Error('请先填写需要上传到的路径'));

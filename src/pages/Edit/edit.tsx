@@ -21,7 +21,7 @@ const Edit = () => {
   useEffect(() => {
     const id = location.state?.id || '';
     getBlogDetail(id);
-  }, []);
+  }, [location, getBlogDetail]);
 
   useEffect(() => {
     setMdString(blogDetail.markdownContent);

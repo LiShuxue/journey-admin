@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { getBlogDetailRequest } from '../http/api';
 
 export const useGetBlogDetail = () => {
   const [loading, setLoading] = useState(false);
   const [blogDetail, setBlogDetail] = useState<BlogDetailType>({} as BlogDetailType);
 
-  const getBlogDetail = (id: string) => {
+  const getBlogDetail = useCallback((id: string) => {
     if (id) {
       setLoading(true);
       getBlogDetailRequest(id)
@@ -20,7 +20,7 @@ export const useGetBlogDetail = () => {
           setLoading(false);
         });
     }
-  };
+  }, []);
 
   return { loading, blogDetail, getBlogDetail };
 };

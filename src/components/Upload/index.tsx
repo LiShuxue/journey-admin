@@ -1,6 +1,5 @@
 import { UploadOutlined } from '@ant-design/icons';
-import { UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload/interface';
+import type { RcFile, UploadProps, UploadFile } from 'antd/es/upload/interface';
 import { Button, Upload, Space, Input, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { getQiniuTokenRequest } from '../../http/api';

@@ -12,7 +12,14 @@ jobs:
 
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
 
+    strategy:
+      matrix:
+        node-version: [18.x] # 使用node
+
     steps:
+      - name: setEnv
+        run: corepack enable # 开启yarn和pnpm
+
       - name: Checkout # check out the repository
         uses: actions/checkout@v2 # 这里使用了github官方提供的action,checkout项目到虚拟机上
 

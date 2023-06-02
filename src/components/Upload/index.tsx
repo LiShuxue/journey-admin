@@ -20,7 +20,7 @@ type CustomeFile = UploadFile & {
   extraData?: QiniuInfoType;
 };
 
-const UploadFile = ({ ossPathByParent = '', disableInput = false }: CompProps) => {
+const UploadFileComp = ({ ossPathByParent = '', disableInput = false }: CompProps) => {
   const [ossPath, setOssPath] = useState('blog/image/前端笔记');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -115,4 +115,4 @@ const UploadFile = ({ ossPathByParent = '', disableInput = false }: CompProps) =
   );
 };
 
-export default UploadFile;
+export default UploadFileComp;

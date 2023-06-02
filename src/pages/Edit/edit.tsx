@@ -6,7 +6,7 @@ import 'md-editor-rt/lib/style.css';
 import { Form, Input, Button, Radio, Modal } from 'antd';
 import { useGetBlogList } from '../../hook/useGetBlogList';
 import { useGetBlogDetail } from '../../hook/useGetBlogDetail';
-import UploadFile from '../../components/Upload';
+import UploadFileComp from '../../components/Upload';
 
 import './edit.scss';
 
@@ -100,7 +100,7 @@ const Edit = () => {
         </Form.Item>
 
         <Form.Item>
-          <UploadFile ossPathByParent={'blog/image/' + categoryValue} disableInput={true} />
+          <UploadFileComp ossPathByParent={'blog/image/' + categoryValue} disableInput={true} />
         </Form.Item>
 
         <Form.Item>

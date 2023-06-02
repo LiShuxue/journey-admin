@@ -18,10 +18,10 @@ jobs:
 
     steps:
       - name: setEnv
-        run: corepack enable # 开启yarn和pnpm
+        run: corepack enable & npm config set registry https://registry.npmmirror.com # 开启yarn和pnpm，设置源
 
       - name: Checkout # check out the repository
-        uses: actions/checkout@v2 # 这里使用了github官方提供的action,checkout项目到虚拟机上
+        uses: actions/checkout@v3 # 这里使用了github官方提供的action,checkout项目到虚拟机上
 
       - name: Install Dependencies # 安装依赖
         run: pnpm i
@@ -30,7 +30,7 @@ jobs:
         run: pnpm build
 
       - name: Clean remote folder # 删除远程的代码
-        uses: garygrossgarten/github-action-ssh@master # 使用第三方action 远程执行命令
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: rm -rf /root/project/journey/journey-admin/dist
           username: root
@@ -38,7 +38,7 @@ jobs:
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
 
       - name: Upload build file to server # 部署
-        uses: appleboy/scp-action@master # 使用第三方action 上传静态文件到服务器
+        uses: appleboy/scp-action@release # 使用第三方action 上传静态文件到服务器
         with:
           host: ${{ secrets.SERVER_IP }}
           username: root
@@ -47,7 +47,7 @@ jobs:
           target: '/root/project/journey/journey-admin' # 代码部署路径
 
       - name: Nginx reload # 重启nginx
-        uses: garygrossgarten/github-action-ssh@master # 使用第三方action 远程执行命令
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: nginx -s reload
           username: root

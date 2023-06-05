@@ -22,7 +22,6 @@ type CustomeFile = UploadFile & {
 
 const UploadFileComp = ({ ossPathByParent = '', disableInput = false }: CompProps) => {
   const [ossPath, setOssPath] = useState('blog/image/前端笔记');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
     if (ossPathByParent) {
@@ -65,33 +64,13 @@ const UploadFileComp = ({ ossPathByParent = '', disableInput = false }: CompProp
   };
 
   const onChange: UploadProps['onChange'] = (info) => {
-    let newFileList = [...info.fileList];
-    newFileList = newFileList.map((file) => {
-      if (file.response) {
-        file.url = file.response.data.url;
-      }
-      return file;
-    });
-
-    setFileList(newFileList);
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} 上传成功`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} 上传失败`);
+    }
   };
 
-  const onRemove: UploadProps['onRemove'] = (file) => {
-    console.log(file);
-    // async removeImage(file) {
-    //   this.sentry.addBreadcrumb('components/Upload.vue --> methods: removeImage');
-    //   try {
-    //     let filename = file.name;
-    //     await this.$confirm(`确定移除 ${filename}？`);
-    //     await this.axios.post(API.requireAuth.removeImage, { filename });
-    //     let index = this.uploadImageList.findIndex(item => item.name === filename);
-    //     this.uploadImageList.splice(index, 1);
-    //   } catch (err) {
-    //     this.handleError(err);
-    //     return Promise.reject(err);
-    //   }
-    // }
-  };
   return (
     <Space direction="vertical">
       <Input
@@ -104,10 +83,8 @@ const UploadFileComp = ({ ossPathByParent = '', disableInput = false }: CompProp
         action={getAction}
         data={getExtraData}
         accept="image/*,.pdf"
-        fileList={fileList}
         beforeUpload={getQiniuServerInfo}
         onChange={onChange}
-        onRemove={onRemove}
       >
         <Button icon={<UploadOutlined />}>点击开始选择文件上传</Button>
       </Upload>

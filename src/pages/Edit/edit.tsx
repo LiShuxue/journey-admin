@@ -13,7 +13,7 @@ import './edit.scss';
 const Edit = () => {
   const location = useLocation();
   const [form] = Form.useForm();
-  const categoryValue = Form.useWatch('category', form);
+  const categoryValue = Form.useWatch('category', form) || '';
   const [mdString, setMdString] = useState('');
   const { categoryList, addCategory } = useGetBlogList();
   const { blogDetail, getBlogDetail } = useGetBlogDetail();
@@ -100,7 +100,7 @@ const Edit = () => {
         </Form.Item>
 
         <Form.Item>
-          <UploadFileComp ossPathByParent={'blog/image/' + categoryValue} disableInput={true} />
+          <UploadFileComp ossPathByParent={`blog/image/${categoryValue}`} disableInput={true} />
         </Form.Item>
 
         <Form.Item>

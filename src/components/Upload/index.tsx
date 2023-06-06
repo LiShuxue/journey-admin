@@ -74,7 +74,7 @@ const UploadFileComp = ({ ossPathByParent = '', disableInput = false }: CompProp
   return (
     <Space>
       <Input
-        addonBefore="ossPath"
+        addonBefore="ossPath:"
         value={ossPath}
         onChange={(e) => setOssPath(e.target.value)}
         disabled={disableInput}

@@ -28,7 +28,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/detail',
-        Component: lazy(() => import('../pages/detail')),
+        Component: lazy(() => import('../pages/Detail/detail')),
       },
       {
         path: '/edit',
@@ -36,7 +36,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/uploadfile',
-        Component: lazy(() => import('../pages/upload')),
+        Component: lazy(() => import('../pages/Upload/upload')),
       },
       {
         path: '/user',

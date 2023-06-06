@@ -72,7 +72,7 @@ const UploadFileComp = ({ ossPathByParent = '', disableInput = false }: CompProp
   };
 
   return (
-    <Space direction="vertical">
+    <Space>
       <Input
         addonBefore="ossPath"
         value={ossPath}

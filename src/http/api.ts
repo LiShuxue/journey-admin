@@ -35,3 +35,11 @@ export const getBlogDetailRequest = (id: string) => {
 export const getQiniuTokenRequest = (key: string) => {
   return http.get(`qiniu/uploadToken?key=${key}`);
 };
+
+export const updateBlogRequest = (blog: BlogDetailType) => {
+  return http.post('blog/update', blog);
+};
+
+export const publishBlogRequest = (blog: BlogDetailType) => {
+  return http.post('blog/publish', blog);
+};

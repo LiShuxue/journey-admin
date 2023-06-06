@@ -19,12 +19,14 @@ type BlogType = {
     name: string;
     url: string;
   };
+  name?: string;
+  url?: string;
   isOriginal: boolean;
-  like: number;
-  see: number;
+  like?: number;
+  see?: number;
   tags: string[];
-  publishTime: number;
-  updateTime: number;
+  publishTime?: number;
+  updateTime?: number;
   _id?: string;
 };
 
@@ -51,5 +53,5 @@ type Reply = Comment & {
 type BlogDetailType = BlogType & {
   htmlContent: string;
   markdownContent: string;
-  comments: Comment[];
+  comments?: Comment[];
 };

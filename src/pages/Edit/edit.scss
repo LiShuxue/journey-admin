@@ -1,5 +1,25 @@
 .edit-blog{
     .ant-form-item-label{
-        width: 80px;
+        width: 90px;
+    }
+
+    .title {
+        width: 100%;
+        .ant-space-item {
+            margin-right: 50px;
+            width: 400px;
+        }
+    }
+
+    .self-label-required {
+        .ant-form-item-label>label::before {
+            display: inline-block;
+            margin-inline-end: 4px;
+            color: #ff4d4f;
+            font-size: 14px;
+            font-family: SimSun,sans-serif;
+            line-height: 1;
+            content: "*";
+        }
     }
 }

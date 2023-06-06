@@ -15,5 +15,6 @@
         box-sizing: border-box;
         // 总宽度 - 左侧菜单宽度 - 两边padding
         width: calc(100vw - 150px - 30px);
+        overflow-y: scroll;
     }
 }

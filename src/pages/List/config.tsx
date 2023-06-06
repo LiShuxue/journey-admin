@@ -54,7 +54,7 @@ export const getColumns = (
       key: 'publishTime',
       width: '200px',
       render: (time: string) => <div>{dayjs(time).format('YYYY-MM-DD HH:mm:ss')}</div>,
-      sorter: (a: BlogType, b: BlogType) => a.publishTime - b.publishTime,
+      sorter: (a: BlogType, b: BlogType) => (a.publishTime as number) - (b.publishTime as number),
     },
     {
       title: '更新时间',
@@ -62,7 +62,7 @@ export const getColumns = (
       key: 'updateTime',
       width: '200px',
       render: (time: string) => <div>{dayjs(time).format('YYYY-MM-DD HH:mm:ss')}</div>,
-      sorter: (a: BlogType, b: BlogType) => a.updateTime - b.updateTime,
+      sorter: (a: BlogType, b: BlogType) => (a.publishTime as number) - (b.publishTime as number),
     },
     {
       title: '操作',

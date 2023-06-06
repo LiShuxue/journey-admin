@@ -42,7 +42,7 @@ const Edit = () => {
       setMdString(blogDetail.markdownContent);
       setTags(blogDetail.tags);
     }
-  }, [blogDetail]);
+  }, [blogDetail, form]);
 
   const showCategory = () => {
     setIsCategoryModalOpen(true);

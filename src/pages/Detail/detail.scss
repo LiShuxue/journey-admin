@@ -8,6 +8,7 @@
     border-radius: 10px;
     padding: 0 20px 40px 20px;
     background: #f8f8f8;
+    flex-grow: 1;
 
     .blog-mark {
       position: absolute;
@@ -63,7 +64,7 @@
     .pre-next {
       margin-top: 20px;
       padding: 5px 20px;
-      background: #f8f8f8;
+      background: white;
       border-radius: 10px;
       color: #6d6d6d;
 
@@ -74,75 +75,15 @@
       }
     }
 
-    .edit-wrapper {
+    .btn-wrapper {
       margin-top: 20px;
-    }
-
-    .tool-wrapper {
-      margin-top: 20px;
-      padding: 20px;
-      background: #f8f8f8;
-      border-radius: 10px;
-      color: #6d6d6d;
-
-      .back-to-top {
-        cursor: pointer;
-        border: 1px solid black;
-        padding: 5px;
-        border-radius: 50%;
-        position: fixed;
-        bottom: 140px;
-        right: calc(50vw - 400px + 40px);
-        z-index: 1000;
-      }
-
-      .time-info,
-      .dianzan,
-      .see-info,
-      .tags {
-        margin-bottom: 20px;
-      }
-
-      .time-info,
-      .dianzan,
-      .see-info {
-        line-height: 25px;
-      }
-
-      .tags {
-        line-height: 32px;
-
-        .tag-item {
-          cursor: pointer;
-          padding: 5px;
-          background: #dadada;
-          border-radius: 10px;
-          margin-right: 10px;
-        }
-      }
-
-      .dianzan {
-        .like {
-          cursor: pointer;
-          font-size: 25px;
-        }
-
-        .liked {
-          color: #2192f5;
-        }
-
-        .msg1,
-        .msg2 {
-          margin-right: 5px;
-        }
-      }
     }
   }
 
   .catalog-wrapper {
     border-radius: 10px;
     padding: 0 20px 40px 20px;
-    background: #f8f8f8;
+    background: white;
     width: 250px;
     flex-shrink: 0;
     margin-left: 20px;

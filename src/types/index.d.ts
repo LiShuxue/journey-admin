@@ -31,27 +31,37 @@ type BlogType = {
 };
 
 // 评论数据
-type Comment = {
-  id: string;
+type Comments = {
+  id?: string;
   arthur: string;
-  date: number;
+  date?: number;
   content: string;
   email: string;
-  reply: Reply[];
-  isHide: boolean;
+  reply?: Reply[];
+  isHide?: boolean;
 };
 
 // 评论的回复
-type Reply = Comment & {
-  parentId: string;
-  replyName: string;
-  replyEmail: string;
-  replyContent: string;
+type Reply = Comments & {
+  parentId?: string;
+  replyName?: string;
+  replyEmail?: string;
+  replyContent?: string;
+};
+
+// 前端发送评论的请求格式
+type CommentRequest = {
+  blog_id?: string;
+  comment: Comments;
+  parent_id?: string;
+  replyContent?: string;
+  replyEmail?: string;
+  replyName?: string;
 };
 
 // 博客详情
 type BlogDetailType = BlogType & {
   htmlContent: string;
   markdownContent: string;
-  comments?: Comment[];
+  comments?: Comments[];
 };

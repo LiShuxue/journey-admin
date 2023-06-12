@@ -7,6 +7,7 @@ import 'md-editor-rt/lib/style.css';
 import { useGetBlogDetail } from '../../hook/useGetBlogDetail';
 import { deleteBlogRequest } from '../../http/api';
 import { usePreNextBlog } from '../../hook/usePreNextBlog';
+import ArticleComments from './ArticleComments';
 
 import './detail.scss';
 
@@ -56,11 +57,11 @@ const Detail = () => {
   };
 
   const clickPreBlog = () => {
-    navigate('/detail', { state: { id: preBlog?._id } });
+    navigate('/detail', { state: { id: preBlog?._id }, replace: true });
     document.querySelector('#root > div > div > div.right')?.scrollTo(0, 0);
   };
   const clickNextBlog = () => {
-    navigate('/detail', { state: { id: nextBlog?._id } });
+    navigate('/detail', { state: { id: nextBlog?._id }, replace: true });
     document.querySelector('#root > div > div > div.right')?.scrollTo(0, 0);
   };
 
@@ -100,6 +101,8 @@ const Detail = () => {
             删除
           </Button>
         </div>
+
+        <ArticleComments blogDetail={blogDetail} />
       </div>
 
       <div className="catalog-wrapper">

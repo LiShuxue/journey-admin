@@ -1,0 +1,59 @@
+.comments-wrapper {
+  background: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+
+  .comments-list {
+    .comment-reply {
+      background: #fafbfc;
+      margin-left: 40px;
+    }
+  }
+
+  .comments-publish {
+    position: relative;
+    background: #fafbfc;
+    .arthur-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    .comment-content {
+      margin-bottom: 45px;
+    }
+    .cancle-button {
+      position: absolute;
+      right: 60px;
+      bottom: 10px;
+    }
+    .confirm-button {
+      position: absolute;
+      right: 0px;
+      bottom: 10px;
+    }
+  }
+
+  .comment-item {
+    margin-bottom: 5px;
+    border-bottom: 1px #eeeeee solid;
+    .arthur {
+      color: #6d6d6d;
+      padding: 5px;
+    }
+    .content {
+      padding: 5px;
+    }
+    .comment-tool-wrapper {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #6d6d6d;
+      padding: 5px;
+      display: flex;
+      .date {
+        margin-right: 10px;
+      }
+    }
+  }
+}

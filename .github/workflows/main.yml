@@ -14,11 +14,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x] # 使用node
+        node-version: [18.x] # 设置bode版本，可以是多个
 
     steps:
-      - name: setEnv
-        run: corepack enable & npm config set registry https://registry.npmmirror.com # 开启yarn和pnpm，设置源
+      - name: Use Node.js ${{ matrix.node-version }} # 使用 node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Show version # 查看版本，方便从log信息上确认
+        run: node -v && npm -v
+
+      - name: setEnv # 开启yarn和pnpm，设置源
+        run: corepack enable && npm config set registry https://registry.npmmirror.com && yarn config set registry https://registry.npmmirror.com && pnpm config set registry https://registry.npmmirror.com
 
       - name: Checkout # check out the repository
         uses: actions/checkout@v3 # 这里使用了github官方提供的action,checkout项目到虚拟机上

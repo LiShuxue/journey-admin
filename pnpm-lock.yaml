@@ -20,8 +20,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   md-editor-rt:
-    specifier: ^4.0.4
-    version: 4.0.4(@codemirror/state@6.2.1)(@codemirror/view@6.12.0)(@lezer/common@1.0.2)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^4.2.0
+    version: 4.2.0(@codemirror/state@6.2.1)(@codemirror/view@6.12.0)(@lezer/common@1.0.2)(react-dom@18.2.0)(react@18.2.0)
   normalize.css:
     specifier: ^8.0.1
     version: 8.0.1
@@ -1350,8 +1350,8 @@ packages:
       eslint-visitor-keys: 3.4.1
     dev: true
 
-  /@vavt/util@1.0.0:
-    resolution: {integrity: sha512-i7Q8PMoZy2z2l1XFrI4VRrrfdNS0NM+CB231qojUy5r81ED4yk4cQX7wn+lid4FJdS8vidhJ8LRb1hSLhYtXjg==}
+  /@vavt/util@1.1.1:
+    resolution: {integrity: sha512-0x+Acegd8k6lFJc7SN4kVhO669fBiMtBjq/WqX2C8Uz5mSgS+nRvfXs0BK2aiV67T0rauBoAmEkQfURQjI2+4Q==}
     dev: false
 
   /@vitejs/plugin-react@4.0.0(vite@4.3.8):
@@ -2306,8 +2306,8 @@ packages:
       uc.micro: 1.0.6
     dev: false
 
-  /md-editor-rt@4.0.4(@codemirror/state@6.2.1)(@codemirror/view@6.12.0)(@lezer/common@1.0.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Q2gJm3Nd4qHIFUK2lq1OZMThFPEgLFcMSOLUT0Qs7wMMW6HVNNNJ5UbUEI9o7TzKtne0YheCeY8dLMvHXQlZqg==}
+  /md-editor-rt@4.2.0(@codemirror/state@6.2.1)(@codemirror/view@6.12.0)(@lezer/common@1.0.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-U4YKx2+6UyU4YF1hoTyE92idb1bGDE2uo3tFT5jgJQlacP2limHIStPupsTzPcIEcsTDYqc/lFpcAIxHXNRXUQ==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -2315,7 +2315,7 @@ packages:
       '@codemirror/lang-markdown': 6.1.1
       '@codemirror/language-data': 6.3.1(@codemirror/state@6.2.1)(@codemirror/view@6.12.0)(@lezer/common@1.0.2)
       '@types/markdown-it': 12.2.3
-      '@vavt/util': 1.0.0
+      '@vavt/util': 1.1.1
       codemirror: 6.0.1(@lezer/common@1.0.2)
       copy-to-clipboard: 3.3.3
       lru-cache: 8.0.5

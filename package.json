@@ -16,7 +16,7 @@
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21",
-    "md-editor-rt": "^4.0.4",
+    "md-editor-rt": "^4.2.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

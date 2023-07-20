@@ -39,3 +39,4 @@ EXPOSE 443
 
 # 可以通过 docker build -t journey-admin . 来创建本地镜像
 # 通过 docker run -d -p 80:80 443:443 --rm journey-admin 来运行此镜像
+# 通过 docker exec -it fdba3 sh 进入容器内部

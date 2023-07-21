@@ -18,6 +18,6 @@ COPY ./dist/ ./dist
 
 # 不需要暴露端口，因为前面有单独的nginx反向代理
 
-# 可以通过 docker build -t journey-admin . 来创建本地镜像
-# 通过 docker run -d --name journey-admin --network journey-network --rm journey-admin 来运行此镜像
+# 可以通过 docker build -t lishuxue/journey-admin . 来创建本地镜像
+# 通过 docker run -d --name journey-admin --rm lishuxue/journey-admin 来运行此镜像
 # 通过 docker exec -it fdba3 sh 进入容器内部

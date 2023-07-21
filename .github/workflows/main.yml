@@ -78,4 +78,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: lishuxue/journey-client:latest
+          tags: lishuxue/journey-admin:latest

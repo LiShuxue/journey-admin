@@ -77,5 +77,6 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
+          context: .
           push: true
           tags: lishuxue/journey-admin:latest

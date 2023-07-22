@@ -60,7 +60,9 @@ jobs:
       #     host: ${{ secrets.SERVER_IP }}
       #     privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
-  my_docker_build_deploy: # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。=
+  my_docker_build_deploy: # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。
+    needs: my_code_build_deploy # 等待第一个job执行完
+
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
 
     steps:

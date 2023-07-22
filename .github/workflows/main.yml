@@ -7,8 +7,8 @@ on: # 在push代码的时候运行此action
       - master
 
 jobs:
-  auto_deploy_job:
-    name: build-deploy
+  build-code:
+    name: code-build-deploy
 
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
 
@@ -62,6 +62,13 @@ jobs:
       #     host: ${{ secrets.SERVER_IP }}
       #     privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
+  build-docker:
+    name: docker-build-deploy # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。
+
+    runs-on: ubuntu-latest # 运行环境，最新ubuntu
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -74,7 +81,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and push image
+      - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
           context: .

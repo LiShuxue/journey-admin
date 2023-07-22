@@ -7,9 +7,7 @@ on: # 在push代码的时候运行此action
       - master
 
 jobs:
-  code:
-    name: code-build-deploy
-
+  my_code_build_deploy: # 代码的打包和部署
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
 
     strategy:
@@ -62,10 +60,10 @@ jobs:
       #     host: ${{ secrets.SERVER_IP }}
       #     privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
-  docker:
-    name: docker-build-deploy # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。
-
+  my_docker_build_deploy: # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。=
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
+
+    steps:
       - name: Checkout source code
         uses: actions/checkout@v3
 

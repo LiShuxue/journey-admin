@@ -7,7 +7,7 @@ on: # 在push代码的时候运行此action
       - master
 
 jobs:
-  build-code:
+  code:
     name: code-build-deploy
 
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
@@ -62,7 +62,7 @@ jobs:
       #     host: ${{ secrets.SERVER_IP }}
       #     privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
-  build-docker:
+  docker:
     name: docker-build-deploy # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。
 
     runs-on: ubuntu-latest # 运行环境，最新ubuntu

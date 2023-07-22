@@ -11,10 +11,14 @@ RUN rm -rf ${NGINX_PATH}/conf.d
 # 复制新的配置文件
 COPY ./nginx.conf ${NGINX_PATH}/
 
-# 源码目录
+# 工作目录
 WORKDIR /journey-admin
 
-COPY ./dist/ ./dist
+# 创建dist文件夹
+RUN mkdir dist
+
+# 将容器的 /journey-admin/dist 文件夹挂载出去
+VOLUME /journey-admin/dist
 
 # 不需要暴露端口，因为前面有单独的nginx反向代理
 

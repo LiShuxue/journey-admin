@@ -72,7 +72,6 @@ const List = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <div>test</div>
             <Button htmlType="submit">查询</Button>
           </Form.Item>
           <Form.Item>

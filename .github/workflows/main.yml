@@ -80,3 +80,27 @@ jobs:
           context: .
           push: true
           tags: lishuxue/journey-admin:latest
+
+      - name: docker pull image # 服务器拉取最新镜像
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        with:
+          command: docker pull lishuxue/journey-admin
+          username: root
+          host: ${{ secrets.SERVER_IP }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+
+      - name: docker stop # 停止服务
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        with:
+          command: cd /root/project/journey/journey-nginx && docker compose down journey-admin
+          username: root
+          host: ${{ secrets.SERVER_IP }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+
+      - name: docker run # 启动服务
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        with:
+          command: cd /root/project/journey/journey-nginx && docker compose up -d journey-admin
+          username: root
+          host: ${{ secrets.SERVER_IP }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}

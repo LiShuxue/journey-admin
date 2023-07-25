@@ -52,7 +52,7 @@ instance.interceptors.response.use(
         },
       });
     } else {
-      message.error(error.response.data.errMsg || 'something wrong');
+      message.error(error.response?.data?.errMsg || 'something wrong');
     }
     return Promise.reject(error.response);
   }

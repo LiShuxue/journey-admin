@@ -39,16 +39,16 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: rm -rf /root/project/journey/journey-admin/dist
-          username: root
           host: ${{ secrets.SERVER_IP }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
 
       - name: Upload build file to server # 部署
         uses: appleboy/scp-action@master # 使用第三方action 上传静态文件到服务器
         with:
           host: ${{ secrets.SERVER_IP }}
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           source: 'dist'
           target: '/root/project/journey/journey-admin' # 代码部署路径
 
@@ -56,9 +56,9 @@ jobs:
       #   uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
       #   with:
       #     command: nginx -s reload
-      #     username: root
       #     host: ${{ secrets.SERVER_IP }}
-      #     privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     username: ${{ secrets.SERVER_USERNAME }}
+      #     password: ${{ secrets.SERVER_PASSWORD }}
 
   my_docker_build_deploy: # docker只是为了启动nginx，docker内部挂载了主机的目录，也就是上面的部署的目录。
     needs: my_code_build_deploy # 等待第一个job执行完
@@ -92,22 +92,22 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: docker pull lishuxue/journey-admin
-          username: root
           host: ${{ secrets.SERVER_IP }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
 
       - name: docker stop # 停止服务
         uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: cd /root/project/journey/journey-nginx && docker compose down journey-admin
-          username: root
           host: ${{ secrets.SERVER_IP }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
 
       - name: docker run # 启动服务
         uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: cd /root/project/journey/journey-nginx && docker compose up -d journey-admin
-          username: root
           host: ${{ secrets.SERVER_IP }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}

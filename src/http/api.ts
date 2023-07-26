@@ -53,3 +53,7 @@ export const hideCommentsRequest = (blog_id: string, commentId: string) => {
 export const deleteCommentsRequest = (blog_id: string, commentId: string) => {
   return http.post('blog/comment/delete', { blog_id, commentId });
 };
+
+export const adminUpload = (body: { project: string; fromPath: string }) => {
+  return http.post('/qiniu/adminupload', body);
+};

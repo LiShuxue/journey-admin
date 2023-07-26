@@ -42,11 +42,6 @@ export default defineConfig({
         changeOrigin: true,
         xfwd: true, // 添加x-forward headers
       },
-      '/adminupload': {
-        target: 'http://localhost:5555',
-        secure: false,
-        changeOrigin: true,
-      },
     },
   },
 });

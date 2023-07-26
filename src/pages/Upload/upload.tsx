@@ -2,15 +2,14 @@ import { useState } from 'react';
 import { Button, Input, Space } from 'antd';
 import UploadFileComp from '../../components/Upload';
 import { UploadOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import { adminUpload } from '../../http/api';
 
 const Upload = () => {
   const [project, setProject] = useState('blog-article');
   const [fromPath, setFromPath] = useState('前端笔记/babel.png');
 
   const uploadFile = () => {
-    // nginx 会重定向到 服务器本地的5555端口，即 http://47.93.18.226:5555
-    axios.post('/adminupload', { project, fromPath });
+    adminUpload({ project, fromPath });
   };
   return (
     <div>

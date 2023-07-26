@@ -51,3 +51,19 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           source: 'dist'
           target: '/root/project/journey/journey-admin' # 代码部署路径
+
+      - name: docker stop # 停止服务
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        with:
+          command: cd /root/project/journey/journey-docker && docker compose down journey-admin
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+
+      - name: docker run # 启动服务
+        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        with:
+          command: cd /root/project/journey/journey-docker && docker compose up -d journey-admin
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}

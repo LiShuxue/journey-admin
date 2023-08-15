@@ -7,9 +7,13 @@ import { adminUpload } from '../../http/api';
 const Upload = () => {
   const [project, setProject] = useState('blog-article');
   const [fromPath, setFromPath] = useState('前端笔记/babel.png');
+  const [isLoading, setLoading] = useState(false);
 
   const uploadFile = () => {
-    adminUpload({ project, fromPath });
+    setLoading(true);
+    adminUpload({ project, fromPath }).finally(() => {
+      setLoading(false);
+    });
   };
   return (
     <div>
@@ -26,7 +30,12 @@ const Upload = () => {
             value={fromPath}
             onChange={(e) => setFromPath(e.target.value)}
           />
-          <Button icon={<UploadOutlined />} onClick={uploadFile}>
+          <Button
+            icon={<UploadOutlined />}
+            onClick={uploadFile}
+            loading={isLoading}
+            disabled={isLoading}
+          >
             点击开始从服务端上传文件
           </Button>
         </Space>

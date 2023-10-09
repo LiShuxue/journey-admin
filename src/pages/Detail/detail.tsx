@@ -73,12 +73,14 @@ const Detail = () => {
         <div className="blog-img">
           <img src={blogDetail.image?.url} alt={blogDetail.image?.name} />
         </div>
-        <MdPreview
-          editorId={id}
-          modelValue={blogDetail.markdownContent}
-          previewTheme="github"
-          codeTheme="github"
-        />
+        <div className="blog-content">
+          <MdPreview
+            editorId={id}
+            modelValue={blogDetail.markdownContent}
+            previewTheme="github"
+            codeTheme="github"
+          />
+        </div>
 
         <div className="pre-next">
           {preBlog && (

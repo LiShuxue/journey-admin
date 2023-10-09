@@ -45,6 +45,22 @@
       border-radius: 5px;
     }
 
+    .blog-content {
+      /* 覆盖一些css样式 */
+      blockquote {
+        margin: 0;
+      }
+      .github-theme pre {
+        font-size: 85%;
+      }
+      .github-theme pre code {
+        padding: 16px;
+      }
+      .github-theme pre code > * {
+        line-height: 1.45;
+      }
+    }
+
     .blog-img > img {
       /*子元素的宽高和容器一样*/
       position: absolute;

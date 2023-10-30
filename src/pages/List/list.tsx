@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Button, Space, Modal, Input, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { deleteBlogRequest } from '../../http/api';
 import { getColumns } from './config';
 import { useGetBlogList } from '../../hook/useGetBlogList';
+import { getBlogDetailRequest } from '../..//http/api';
 
 const List = () => {
   const navigate = useNavigate();
   const { blogList, loading, fetchList } = useGetBlogList();
   const [listData, setListData] = useState<BlogType[]>([]);
   const [form] = Form.useForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [titles, setTitles] = useState<Element[]>([]);
 
   useEffect(() => {
     setListData(blogList);
@@ -62,7 +65,30 @@ const List = () => {
     });
   };
 
-  const columns = getColumns(gotoDetail, gotoEdit, deleteItem);
+  const showTitleOnly = (blog: BlogType) => {
+    getBlogDetailRequest(blog._id!).then((res) => {
+      const blog = res.data.blog || {};
+      // 创建DOMParser对象并将HTML字符串转换为DOM文档
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(blog.htmlContent, 'text/html');
+      // 获取所有标题标签
+      const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      const arr = Array.from(headings);
+      setTitles(arr);
+      setIsModalOpen(true);
+    });
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+    setTitles([]);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setTitles([]);
+  };
+
+  const columns = getColumns(gotoDetail, gotoEdit, deleteItem, showTitleOnly);
 
   return (
     <div className="blog-list">
@@ -92,6 +118,19 @@ const List = () => {
           }}
         />
       </Space>
+
+      <Modal title="文章目录" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <div style={{ fontSize: '70%', overflow: 'scroll', height: '500px' }}>
+          {titles.map((ele, index) => {
+            // 将DOM元素转换为React元素
+            const reactElement = React.createElement(ele.tagName.toLowerCase(), {
+              key: `heading-${index}`,
+              dangerouslySetInnerHTML: { __html: ele.innerHTML },
+            });
+            return reactElement;
+          })}
+        </div>
+      </Modal>
     </div>
   );
 };

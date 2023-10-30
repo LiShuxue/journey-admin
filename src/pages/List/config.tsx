@@ -5,7 +5,8 @@ import dayjs from 'dayjs';
 export const getColumns = (
   gotoDetail: (blog: BlogType) => void,
   gotoEdit: (blog: BlogType) => void,
-  deleteItem: (blog: BlogType) => void
+  deleteItem: (blog: BlogType) => void,
+  showTitleOnly: (blog: BlogType) => void
 ): ColumnsType<BlogType> => {
   return [
     {
@@ -75,6 +76,9 @@ export const getColumns = (
           <Button onClick={() => gotoEdit(blog)}>编辑</Button>
           <Button danger onClick={() => deleteItem(blog)}>
             删除
+          </Button>
+          <Button type="primary" onClick={() => showTitleOnly(blog)}>
+            查看目录
           </Button>
         </Space>
       ),

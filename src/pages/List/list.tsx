@@ -66,6 +66,7 @@ const List = () => {
   };
 
   const showTitleOnly = (blog: BlogType) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     getBlogDetailRequest(blog._id!).then((res) => {
       const blog = res.data.blog || {};
       // 创建DOMParser对象并将HTML字符串转换为DOM文档

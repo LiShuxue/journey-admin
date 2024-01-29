@@ -27,7 +27,7 @@ jobs:
         run: corepack enable && npm config set registry https://registry.npmmirror.com && yarn config set registry https://registry.npmmirror.com && pnpm config set registry https://registry.npmmirror.com
 
       - name: Checkout # check out the repository
-        uses: actions/checkout@v3 # 这里使用了github官方提供的action,checkout项目到虚拟机上
+        uses: actions/checkout@v4 # 这里使用了github官方提供的action,checkout项目到虚拟机上
 
       - name: Install Dependencies # 安装依赖
         run: pnpm i

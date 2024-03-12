@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Button, Input, Space } from 'antd';
 import UploadFileComp from '../../components/Upload';
-import { UploadOutlined } from '@ant-design/icons';
-import { adminUpload } from '../../http/api';
+import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
+import { adminUpload, deleteBucketFile } from '../../http/api';
 
 const Upload = () => {
   const [project, setProject] = useState('blog-article');
   const [fromPath, setFromPath] = useState('前端笔记/babel.png');
+  const [filename, setFilename] = useState('');
+  const [ossPath, setOssPath] = useState('blog/mongodb/');
   const [isLoading, setLoading] = useState(false);
 
   const uploadFile = () => {
@@ -15,6 +17,14 @@ const Upload = () => {
       setLoading(false);
     });
   };
+
+  const deleteFile = () => {
+    setLoading(true);
+    deleteBucketFile({ filename: ossPath + filename }).finally(() => {
+      setLoading(false);
+    });
+  };
+
   return (
     <div>
       <div style={{ marginBottom: '45px' }}>
@@ -41,9 +51,33 @@ const Upload = () => {
         </Space>
       </div>
 
-      <div>
+      <div style={{ marginBottom: '45px' }}>
         <p>2、客户端上传，可以直接选择文件进行上传，但是可能公司内网限制上传不了</p>
         <UploadFileComp />
+      </div>
+
+      <div style={{ marginBottom: '45px' }}>
+        <p>3、删除文件，根据文件名称，删除bucket上对应oss path的文件</p>
+        <Space>
+          <Input
+            addonBefore="ossPath:"
+            value={ossPath}
+            onChange={(e) => setOssPath(e.target.value)}
+          />
+          <Input
+            addonBefore="filename:"
+            value={filename}
+            onChange={(e) => setFilename(e.target.value)}
+          />
+          <Button
+            icon={<DeleteOutlined />}
+            onClick={deleteFile}
+            loading={isLoading}
+            disabled={isLoading}
+          >
+            点击删除文件
+          </Button>
+        </Space>
       </div>
     </div>
   );

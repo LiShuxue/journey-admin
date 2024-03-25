@@ -37,7 +37,10 @@ export default defineConfig({
     proxy: {
       '/blog-api': {
         target: 'http://localhost:4000',
-        // pathRewrite: { '^/blog-api': '' },
+        // rewrite: (path) => {
+        //   const newPath = path.replace('/blog-api', '');
+        //   return newPath;
+        // },
         secure: false,
         changeOrigin: true,
         xfwd: true, // 添加x-forward headers

@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x] # 设置bode版本，可以是多个
+        node-version: [18.20.0] # 设置bode版本，可以是多个
 
     steps:
       - name: Use Node.js ${{ matrix.node-version }} # 使用 node

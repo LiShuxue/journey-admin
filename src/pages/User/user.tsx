@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Space, Modal, Form, Input } from 'antd';
-import SHA256 from 'crypto-js/sha256';
 import {
   deleteUserRequest,
   registerRequest,
@@ -69,13 +68,13 @@ const User = () => {
       if (title === '新增') {
         await registerRequest({
           username: user.username,
-          password: SHA256(user.password).toString(),
+          password: btoa(encodeURIComponent(user.password)),
         });
       } else if (title === '编辑') {
         await updateUserRequest({
           _id: user._id,
           username: user.username,
-          password: SHA256(user.password).toString(),
+          password: btoa(encodeURIComponent(user.password)),
         });
       }
       closeModal();

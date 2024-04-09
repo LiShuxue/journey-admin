@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
-import SHA256 from 'crypto-js/sha256';
 import { loginRequest } from '../../http/api';
 import { setAccessToken, setRefreshToken, setUsername } from '../../context/auth';
 
@@ -16,7 +15,7 @@ const Login = () => {
   const login = (user: UserType) => {
     loginRequest({
       username: user.username,
-      password: SHA256(user.password).toString(),
+      password: btoa(encodeURIComponent(user.password)),
     })
       .then((response) => {
         const at = response.data.access_token || '';

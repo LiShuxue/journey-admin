@@ -19,7 +19,7 @@ const User = () => {
     setLoading(true);
     userListRequest()
       .then((response) => {
-        const list = response.data.userList || [];
+        const list = response.data || [];
         setUserData(list);
       })
       .catch((e) => {
@@ -109,7 +109,7 @@ const User = () => {
       cancelText: 'Cancel',
       closable: false,
       onOk: () => {
-        deleteUserRequest({ ids: [user._id] })
+        deleteUserRequest({ id: user._id })
           .then(() => {
             fetchData();
           })

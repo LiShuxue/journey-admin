@@ -18,8 +18,8 @@ const Login = () => {
       password: btoa(encodeURIComponent(user.password)),
     })
       .then((response) => {
-        const at = response.data.access_token || '';
-        const rt = response.data.refresh_token || '';
+        const at = response.data.accessToken || '';
+        const rt = response.data.refreshToken || '';
         const un = response.data.username || '';
         if (at && rt && un) {
           setAccessToken(at);

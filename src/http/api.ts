@@ -1,23 +1,23 @@
 import http from './axios';
 
 export const loginRequest = (body: UserType) => {
-  return http.post('admin/login', body);
+  return http.post('auth/login', body);
 };
 
 export const userListRequest = () => {
-  return http.get('admin/list');
+  return http.get('user/list');
 };
 
 export const registerRequest = (body: UserType) => {
-  return http.post('admin/register', body);
+  return http.post('user/create', body);
 };
 
 export const updateUserRequest = (body: UserType) => {
-  return http.post('admin/update', body);
+  return http.post('user/update', body);
 };
 
-export const deleteUserRequest = (body: IDsType) => {
-  return http.post('admin/delete', body);
+export const deleteUserRequest = (body: IDType) => {
+  return http.post('user/delete', body);
 };
 
 export const blogListRequest = () => {

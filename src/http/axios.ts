@@ -20,10 +20,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    if (response.status === 200 && response.data.errMsg) {
-      message.error(response.data.errMsg);
-      return Promise.reject(response);
-    }
     if (
       response.status === 200 &&
       response.headers['new-access-token'] &&
@@ -32,8 +28,8 @@ instance.interceptors.response.use(
       setAccessToken(response.headers['new-access-token']);
       setRefreshToken(response.headers['new-refresh-token']);
     }
-    response.data.successMsg && message.success(response.data.successMsg);
-    return response;
+    message.success(response.data.message);
+    return response.data;
   },
   (error) => {
     if (error.response && error.response.status === 401) {
@@ -52,7 +48,7 @@ instance.interceptors.response.use(
         },
       });
     } else {
-      message.error(error.response?.data?.errMsg || 'something wrong');
+      message.error(error.response?.data?.message || 'something wrong');
     }
     return Promise.reject(error.response);
   }

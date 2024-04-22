@@ -6,8 +6,8 @@ type UserType = {
 };
 
 // 调删除接口时需要传ids
-type IDsType = {
-  ids: Array<sting>;
+type IDType = {
+  id: sting;
 };
 
 // 后台返回的博客列表数据

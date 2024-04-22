@@ -10,7 +10,7 @@ export const useGetBlogList = () => {
     setLoading(true);
     blogListRequest()
       .then((response) => {
-        const list: BlogType[] = response.data.blogList || [];
+        const list: BlogType[] = response.data || [];
         setList(list);
 
         const categoryList: string[] = [];

@@ -10,7 +10,7 @@ export const useGetBlogDetail = () => {
       setLoading(true);
       getBlogDetailRequest(id)
         .then((response) => {
-          const blog = response.data.blog || {};
+          const blog = response.data || {};
           setBlogDetail(blog);
         })
         .catch((e) => {

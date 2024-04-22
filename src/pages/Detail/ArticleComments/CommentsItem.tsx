@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Button } from 'antd';
@@ -6,19 +6,12 @@ import CommentsPublish from './CommentsPublish';
 import { hideCommentsRequest, deleteCommentsRequest } from '../../../http/api';
 
 type CommentsItemProps = {
-  comment: Reply;
+  comment: Comments | Reply;
   blogDetail: BlogDetailType;
-  parent?: Reply;
-  confirmAction: (comment: CommentRequest) => void;
-  children?: React.ReactNode;
+  parent?: Comments;
+  replyComments: (reply: ReplyRequest) => void;
 };
-const CommentsItem = ({
-  parent,
-  comment,
-  blogDetail,
-  confirmAction,
-  children,
-}: CommentsItemProps) => {
+const CommentsItem = ({ parent, comment, blogDetail, replyComments }: CommentsItemProps) => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -26,14 +19,13 @@ const CommentsItem = ({
     setShow(true);
   };
 
-  const handleAddComments = (newComment: CommentRequest) => {
-    const comInfo = newComment.comment;
-    confirmAction({
-      comment: comInfo,
-      parent_id: parent ? parent.id : comment.id,
-      replyName: comment.arthur,
-      replyEmail: comment.email,
-      replyContent: comment.content,
+  const handleAddComments = ({ newComment, replyId }: any) => {
+    replyComments({
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      blogId: blogDetail._id!,
+      comment: newComment,
+      parentId: parent ? parent.id : comment.id,
+      replyId,
     });
     setShow(false);
   };
@@ -61,10 +53,12 @@ const CommentsItem = ({
   return (
     <div className="comment-item" style={{ display: comment.isHide ? 'none' : 'block' }}>
       <div className="arthur">
-        {comment.replyName ? (
+        {'isReplyParent' in comment && !comment.isReplyParent && comment.replyArthur ? (
           <span>
-            {comment.arthur}&nbsp;回复&nbsp;{comment.replyName}
+            {comment.arthur}&nbsp;回复&nbsp;{comment.replyArthur}
           </span>
+        ) : 'isReplyParent' in comment && comment.isReplyParent ? (
+          <span>{comment.arthur}&nbsp;回复&nbsp;楼主</span>
         ) : (
           <span>{comment.arthur}</span>
         )}
@@ -92,12 +86,26 @@ const CommentsItem = ({
       {show && (
         <CommentsPublish
           showCancle={true}
-          confirmAction={handleAddComments}
+          confirmAction={(val) =>
+            handleAddComments({ newComment: val.comment, replyId: comment.id })
+          }
           cancleAction={() => setShow(false)}
         />
       )}
 
-      {children}
+      <div className="comment-reply">
+        {'reply' in comment &&
+          comment.reply &&
+          comment.reply.map((item: Reply, index: number) => (
+            <CommentsItem
+              key={index}
+              parent={comment}
+              comment={item}
+              blogDetail={blogDetail}
+              replyComments={replyComments}
+            />
+          ))}
+      </div>
     </div>
   );
 };

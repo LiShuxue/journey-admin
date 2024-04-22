@@ -54,7 +54,7 @@ const List = () => {
       cancelText: 'Cancel',
       closable: false,
       onOk: () => {
-        deleteBlogRequest({ ids: [blog._id] })
+        deleteBlogRequest({ id: blog._id })
           .then(() => {
             fetchList();
           })
@@ -68,7 +68,7 @@ const List = () => {
   const showTitleOnly = (blog: BlogType) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     getBlogDetailRequest(blog._id!).then((res) => {
-      const blog = res.data.blog || {};
+      const blog = res.data || {};
       // 创建DOMParser对象并将HTML字符串转换为DOM文档
       const parser = new DOMParser();
       const doc = parser.parseFromString(blog.htmlContent, 'text/html');

@@ -45,7 +45,7 @@ const Detail = () => {
       cancelText: 'Cancel',
       closable: false,
       onOk: () => {
-        deleteBlogRequest({ ids: [blogDetail._id] })
+        deleteBlogRequest({ id: blogDetail._id })
           .then(() => {
             navigate('/list', { replace: true });
           })

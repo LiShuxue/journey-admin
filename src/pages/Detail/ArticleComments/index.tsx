@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import CommentsPublish from './CommentsPublish';
 import CommentsItem from './CommentsItem';
-import { addCommentsRequest } from '../../../http/api';
+import { addCommentsRequest, replyCommentsRequest } from '../../../http/api';
 
 import './index.scss';
 
@@ -13,13 +13,27 @@ const ArticleComments = ({ blogDetail }: ArticleCommentsProps) => {
   const navigate = useNavigate();
 
   const addComments = (commentInfo: CommentRequest) => {
-    const { parent_id, replyName, replyEmail, replyContent, comment } = commentInfo;
+    const { comment } = commentInfo;
     addCommentsRequest({
-      blog_id: blogDetail._id,
-      replyName,
-      replyEmail,
-      replyContent,
-      parent_id,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      blogId: blogDetail._id!,
+      comment,
+    })
+      .then(() => {
+        navigate('/detail', { state: { id: blogDetail._id }, replace: true });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const replyComments = (replyInfo: ReplyRequest) => {
+    const { parentId, replyId, comment } = replyInfo;
+    replyCommentsRequest({
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      blogId: blogDetail._id!,
+      parentId,
+      replyId,
       comment,
     })
       .then(() => {
@@ -32,30 +46,16 @@ const ArticleComments = ({ blogDetail }: ArticleCommentsProps) => {
 
   return (
     <div className="comments-wrapper">
+      <CommentsPublish confirmAction={addComments} />
       <div className="comments-list">
-        <CommentsPublish confirmAction={addComments} />
-
         {blogDetail.comments &&
-          blogDetail.comments.map((comment: Reply, index: number) => (
+          blogDetail.comments.map((comment: Comments, index: number) => (
             <CommentsItem
               key={index}
               comment={comment}
               blogDetail={blogDetail}
-              confirmAction={addComments}
-            >
-              <div className="comment-reply">
-                {comment.reply &&
-                  comment.reply.map((item: Reply, index: number) => (
-                    <CommentsItem
-                      key={index}
-                      parent={comment}
-                      comment={item}
-                      blogDetail={blogDetail}
-                      confirmAction={addComments}
-                    />
-                  ))}
-              </div>
-            </CommentsItem>
+              replyComments={replyComments}
+            ></CommentsItem>
           ))}
       </div>
     </div>

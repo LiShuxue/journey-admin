@@ -24,7 +24,7 @@ export const blogListRequest = () => {
   return http.get('blog/list');
 };
 
-export const deleteBlogRequest = (body: IDsType) => {
+export const deleteBlogRequest = (body: IDType) => {
   return http.post('blog/delete', body);
 };
 
@@ -41,17 +41,20 @@ export const updateBlogRequest = (blog: BlogDetailType) => {
 };
 
 export const publishBlogRequest = (blog: BlogDetailType) => {
-  return http.post('blog/publish', blog);
+  return http.post('blog/create', blog);
 };
 
 export const addCommentsRequest = (comment: CommentRequest) => {
   return http.post('blog/comment/add', comment);
 };
-export const hideCommentsRequest = (blog_id: string, commentId: string) => {
-  return http.post('blog/comment/hide', { blog_id, commentId });
+export const replyCommentsRequest = (reply: ReplyRequest) => {
+  return http.post('blog/comment/reply', reply);
 };
-export const deleteCommentsRequest = (blog_id: string, commentId: string) => {
-  return http.post('blog/comment/delete', { blog_id, commentId });
+export const hideCommentsRequest = (blogId: string, commentId: string) => {
+  return http.post('blog/comment/hide', { blogId, commentId });
+};
+export const deleteCommentsRequest = (blogId: string, commentId: string) => {
+  return http.post('blog/comment/delete', { blogId, commentId });
 };
 
 export const adminUpload = (body: { project: string; fromPath: string }) => {

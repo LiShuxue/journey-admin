@@ -33,7 +33,7 @@ export const getBlogDetailRequest = (id: string) => {
 };
 
 export const getQiniuTokenRequest = (key: string) => {
-  return http.get(`qiniu/uploadToken?key=${key}`);
+  return http.get(`common/uploadToken?key=${key}`);
 };
 
 export const updateBlogRequest = (blog: BlogDetailType) => {
@@ -58,9 +58,9 @@ export const deleteCommentsRequest = (blogId: string, commentId: string) => {
 };
 
 export const adminUpload = (body: { project: string; fromPath: string }) => {
-  return http.post('/qiniu/adminupload', body);
+  return http.post('/common/uploadFile', body);
 };
 
 export const deleteBucketFile = (body: { filename: string }) => {
-  return http.post('/qiniu/removeImage', body);
+  return http.post('/common/deleteFile', body);
 };

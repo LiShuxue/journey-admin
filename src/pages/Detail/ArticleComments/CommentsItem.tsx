@@ -19,12 +19,19 @@ const CommentsItem = ({ parent, comment, blogDetail, replyComments }: CommentsIt
     setShow(true);
   };
 
-  const handleAddComments = ({ newComment, replyId }: any) => {
+  const handleAddComments = ({
+    newComment,
+    replyId,
+  }: {
+    newComment: Comments;
+    replyId: string;
+  }) => {
     replyComments({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       blogId: blogDetail._id!,
       comment: newComment,
-      parentId: parent ? parent.id : comment.id,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      parentId: (parent ? parent.id : comment.id)!,
       replyId,
     });
     setShow(false);
@@ -87,7 +94,8 @@ const CommentsItem = ({ parent, comment, blogDetail, replyComments }: CommentsIt
         <CommentsPublish
           showCancle={true}
           confirmAction={(val) =>
-            handleAddComments({ newComment: val.comment, replyId: comment.id })
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            handleAddComments({ newComment: val.comment, replyId: comment.id! })
           }
           cancleAction={() => setShow(false)}
         />

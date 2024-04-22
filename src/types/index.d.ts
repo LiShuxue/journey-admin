@@ -32,13 +32,13 @@ type BlogType = {
 
 // 评论
 type Comments = {
-  id: string; // 评论id，后端自动生成
+  id?: string; // 评论id，后端自动生成
   arthur: string; // 评论作者，前端传
   email: string; // 评论作者的邮箱，前端传
   content: string; // 评论内容，前端传
-  reply: Reply[]; // 该评论下面所有的回复
-  date: number; // 评论时间
-  isHide: boolean; // 是否需要隐藏
+  reply?: Reply[]; // 该评论下面所有的回复
+  date?: number; // 评论时间
+  isHide?: boolean; // 是否需要隐藏
 };
 
 // 评论下的回复

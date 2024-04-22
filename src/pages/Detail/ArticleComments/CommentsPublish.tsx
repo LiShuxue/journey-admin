@@ -4,7 +4,7 @@ const { TextArea } = Input;
 
 type CommentsPublishProps = {
   showCancle?: boolean;
-  confirmAction: (comment: CommentRequest) => void;
+  confirmAction: (commentInfo: { comment: Comments }) => void;
   cancleAction?: () => void;
 };
 

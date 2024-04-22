@@ -12,7 +12,7 @@ type ArticleCommentsProps = {
 const ArticleComments = ({ blogDetail }: ArticleCommentsProps) => {
   const navigate = useNavigate();
 
-  const addComments = (commentInfo: CommentRequest) => {
+  const addComments = (commentInfo: { comment: Comments }) => {
     const { comment } = commentInfo;
     addCommentsRequest({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

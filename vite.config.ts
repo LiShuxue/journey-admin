@@ -34,6 +34,7 @@ export default defineConfig({
   ],
   server: {
     port: 8001,
+    host: '0.0.0.0',
     proxy: {
       '/blog-api': {
         target: 'http://localhost:4000',

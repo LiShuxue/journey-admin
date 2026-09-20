@@ -15,19 +15,26 @@ jobs:
         node-version: [18.20.0] # 设置bode版本，可以是多个
 
     steps:
+      - name: Checkout # check out the repository
+        uses: actions/checkout@v7 # 这里使用了github官方提供的action,checkout项目到虚拟机上
+
       - name: Use Node.js ${{ matrix.node-version }} # 使用 node
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9.12.1
+
       - name: Show version # 查看版本，方便从log信息上确认
-        run: node -v && npm -v
+        run: node -v && npm -v && pnpm -v
 
-      - name: setEnv # 开启yarn和pnpm，设置源
-        run: corepack enable && npm config set registry https://registry.npmmirror.com && yarn config set registry https://registry.npmmirror.com && pnpm config set registry https://registry.npmmirror.com
-
-      - name: Checkout # check out the repository
-        uses: actions/checkout@v7 # 这里使用了github官方提供的action,checkout项目到虚拟机上
+      - name: Set registry
+        run: |
+          npm config set registry https://registry.npmmirror.com
+          pnpm config set registry https://registry.npmmirror.com
 
       - name: Install Dependencies # 安装依赖
         run: pnpm i

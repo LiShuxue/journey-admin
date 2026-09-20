@@ -23,18 +23,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 9.12.1
+      - name: setEnv # 开启yarn和pnpm，设置源
+        run: corepack enable && npm config set registry https://registry.npmmirror.com && pnpm config set registry https://registry.npmmirror.com
 
-      - name: Show version # 查看版本，方便从log信息上确认
+      - name: Show version
         run: node -v && npm -v && pnpm -v
-
-      - name: Set registry
-        run: |
-          npm config set registry https://registry.npmmirror.com
-          pnpm config set registry https://registry.npmmirror.com
 
       - name: Install Dependencies # 安装依赖
         run: pnpm i
